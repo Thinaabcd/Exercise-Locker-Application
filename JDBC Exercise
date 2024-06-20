@@ -1,0 +1,46 @@
+// 1 Create Table 
+CREATE TABLE Product (
+    id INT PRIMARY KEY,
+    name VARCHAR(255),
+    price_per_unit DOUBLE,
+    active_for_sell BOOLEAN
+);
+// 2 Using JDBC in java foundation to show all Product items in console.
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class ProductDisplay {
+    public static void main(String[] args) {
+        String jdbcUrl = "jdbc:mysql://localhost:3306/your_database_name";
+        String username = "your_username";
+        String password = "your_password";
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = DriverManager.getConnection(jdbcUrl, username, password);
+            statement = connection.createStatement();        
+            String sql = "SELECT * FROM Product";
+            resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                double pricePerUnit = resultSet.getDouble("price_per_unit");
+                boolean activeForSell = resultSet.getBoolean("active_for_sell");
+                System.out.println("ID: " + id + ", Name: " + name + ", Price Per Unit: " + pricePerUnit + ", Active For Sell: " + activeForSell);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (resultSet != null) resultSet.close();
+                if (statement != null) statement.close();
+                if (connection != null) connection.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
