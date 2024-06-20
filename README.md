@@ -1,5 +1,6 @@
-# Exercise-Locker-Application
-Exercise: Locker Application
+//Exercise-Locker-Application
+//Exercise: Locker Application
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,7 +16,6 @@ public class LockerApp extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(300, 200);
         setLayout(new BorderLayout());
-
         JPanel buttonPanel = new JPanel(new GridLayout(4, 3));
         JButton[] buttons = new JButton[9];
         for (int i = 0; i < 9; i++) {
@@ -23,7 +23,6 @@ public class LockerApp extends JFrame {
             buttonPanel.add(buttons[i]);
             buttons[i].addActionListener(new NumberButtonListener());
         }
-
         JPanel controlPanel = new JPanel();
         JButton clearButton = new JButton("Clear");
         JButton enterButton = new JButton("Enter");
@@ -31,20 +30,15 @@ public class LockerApp extends JFrame {
         enterButton.addActionListener(new EnterButtonListener());
         controlPanel.add(clearButton);
         controlPanel.add(enterButton);
-
         passwordField = new JPasswordField(10);
         passwordField.setEditable(false);
-
         statusLabel = new JLabel("Enter Password");
-
         add(buttonPanel, BorderLayout.CENTER);
         add(controlPanel, BorderLayout.SOUTH);
         add(passwordField, BorderLayout.NORTH);
         add(statusLabel, BorderLayout.EAST);
-
         setVisible(true);
     }
-
     private class NumberButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -52,7 +46,6 @@ public class LockerApp extends JFrame {
             passwordField.setText(passwordField.getText() + source.getText());
         }
     }
-
     private class ClearButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -60,7 +53,6 @@ public class LockerApp extends JFrame {
             statusLabel.setText("Enter Password");
         }
     }
-
     private class EnterButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -78,7 +70,6 @@ public class LockerApp extends JFrame {
             passwordField.setText("");
         }
     }
-
     public static void main(String[] args) {
         new LockerApp();
     }
